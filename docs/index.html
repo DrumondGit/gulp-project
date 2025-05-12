@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1><strong>🚀 Gulp Build System - Documentação Completa</strong></h1>
+<p><img src="https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen" alt="Node.js"><br>
+<img src="https://img.shields.io/badge/gulp-4.0.2-blue" alt="Gulp"><br>
+<img src="https://img.shields.io/badge/license-MIT-green" alt="License"></p>
+<p>Um <strong>sistema de build automatizado</strong> usando <strong>Gulp</strong> para processar <strong>SASS, LESS, JavaScript</strong>, gerar <strong>documentação</strong> e <strong>relatórios de otimização</strong>.</p>
+<hr>
+<h2><strong>📥 Instalação</strong></h2>
+<h3><strong>Pré-requisitos</strong></h3>
+<ul>
+<li>Node.js <strong>v14+</strong></li>
+<li>NPM ou Yarn</li>
+</ul>
+<h3><strong>Passos</strong></h3>
+<ol>
+<li>Clone o repositório:<pre class="prettyprint source lang-bash"><code>git clone https://github.com/seu-usuario/gulp-project.git
+cd gulp-project
+</code></pre>
+</li>
+<li>Instale as dependências:<pre class="prettyprint source lang-bash"><code>npm install
+</code></pre>
+ou<pre class="prettyprint source lang-bash"><code>yarn install
+</code></pre>
+</li>
+</ol>
+<hr>
+<h2><strong>⚡ Comandos Disponíveis</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm run build</code></td>
+<td>Executa todo o processo de build</td>
+</tr>
+<tr>
+<td><code>npm run styles</code></td>
+<td>Compila apenas SASS/LESS para CSS</td>
+</tr>
+<tr>
+<td><code>npm run scripts</code></td>
+<td>Minifica e concatena JavaScript</td>
+</tr>
+<tr>
+<td><code>npm run docs</code></td>
+<td>Gera documentação JSDoc</td>
+</tr>
+<tr>
+<td><code>npm run report</code></td>
+<td>Cria relatório de otimização (HTML)</td>
+</tr>
+<tr>
+<td><code>npm test</code></td>
+<td>Executa testes (se configurados)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><strong>📂 Estrutura do Projeto</strong></h2>
+<pre class="prettyprint source"><code>gulp-project/
+├── src/
+│   ├── js/        # Arquivos JavaScript originais
+│   ├── sass/      # Arquivos .scss/.sass
+│   └── less/      # Arquivos .less
+├── dist/          # Saída dos assets processados
+│   ├── css/       # CSS otimizado
+│   └── js/        # JS minificado
+├── docs/          # Documentação gerada (JSDoc)
+├── test/          # Testes (opcional)
+├── gulpfile.js    # Configuração do Gulp
+└── package.json   # Dependências e scripts
+</code></pre>
+<hr>
+<h2><strong>🔧 Tarefas Gulp</strong></h2>
+<h3><strong>1. <code>styles</code></strong></h3>
+<ul>
+<li>Compila <strong>SASS/SCSS</strong> e <strong>LESS</strong> para CSS</li>
+<li>Minifica usando <code>clean-css</code></li>
+<li>Gera relatório de otimização</li>
+</ul>
+<p><strong>Uso:</strong></p>
+<pre class="prettyprint source lang-bash"><code>npx gulp styles
+</code></pre>
+<h3><strong>2. <code>less</code></strong></h3>
+<ul>
+<li>Processa apenas arquivos <strong>LESS</strong></li>
+</ul>
+<p><strong>Uso:</strong></p>
+<pre class="prettyprint source lang-bash"><code>npx gulp less
+</code></pre>
+<h3><strong>3. <code>scripts</code></strong></h3>
+<ul>
+<li>Concatena e minifica <strong>JavaScript</strong> com <code>terser</code></li>
+<li>Gera <code>app.min.js</code></li>
+</ul>
+<p><strong>Uso:</strong></p>
+<pre class="prettyprint source lang-bash"><code>npx gulp scripts
+</code></pre>
+<h3><strong>4. <code>docs</code></strong></h3>
+<ul>
+<li>Gera documentação via <strong>JSDoc</strong> na pasta <code>/docs</code></li>
+</ul>
+<p><strong>Uso:</strong></p>
+<pre class="prettyprint source lang-bash"><code>npx gulp docs
+</code></pre>
+<h3><strong>5. <code>report</code></strong></h3>
+<ul>
+<li>Cria um <strong>relatório HTML</strong> (<code>report.html</code>) com métricas de:
+<ul>
+<li>Tamanho original vs. otimizado</li>
+<li>Economia de espaço</li>
+</ul>
+</li>
+</ul>
+<p><strong>Uso:</strong></p>
+<pre class="prettyprint source lang-bash"><code>npx gulp report
+</code></pre>
+<hr>
+<h2><strong>🛠 Configuração Avançada</strong></h2>
+<h3><strong>Modificando caminhos</strong></h3>
+<p>Edite o <code>gulpfile.js</code> para alterar:</p>
+<pre class="prettyprint source lang-javascript"><code>// Exemplo: Mudar destino do CSS
+gulp.task('styles', () => {
+  return gulp.src('src/sass/**/*.scss')
+    .pipe(gulp.dest('out/css')); // Altere para sua pasta
+});
+</code></pre>
+<h3><strong>Adicionando novos processadores</strong></h3>
+<ol>
+<li>Instale o plugin (ex: <code>gulp-postcss</code>):<pre class="prettyprint source lang-bash"><code>npm install gulp-postcss autoprefixer --save-dev
+</code></pre>
+</li>
+<li>Adicione ao <code>gulpfile.js</code>:<pre class="prettyprint source lang-javascript"><code>const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+
+gulp.task('styles', () => {
+  return gulp.src('src/sass/**/*.scss')
+    .pipe(postcss([autoprefixer()])) // Adiciona prefixos CSS
+    .pipe(gulp.dest('dist/css'));
+});
+</code></pre>
+</li>
+</ol>
+<hr>
+<h2><strong>🚨 Solução de Problemas</strong></h2>
+<h3><strong>Erro: <code>No test files found: &quot;test&quot;</code></strong></h3>
+<ul>
+<li><strong>Causa:</strong> A pasta <code>test/</code> não existe ou está vazia.</li>
+<li><strong>Solução:</strong><pre class="prettyprint source lang-bash"><code>mkdir test
+echo &quot;describe('Teste', () => { it('should pass', () => { expect(true).toBe(true); }); });&quot; > test/example.test.js
+</code></pre>
+</li>
+</ul>
+<h3><strong>Erro: <code>File not found: README.md</code></strong></h3>
+<ul>
+<li><strong>Solução:</strong> Crie um <code>README.md</code> vazio:<pre class="prettyprint source lang-bash"><code>touch README.md
+</code></pre>
+Ou remova <code>README.md</code> da tarefa <code>docs</code> no <code>gulpfile.js</code>.</li>
+</ul>
+<hr>
+<h2><strong>📜 Licença</strong></h2>
+<p>MIT © [Seu Nome]</p>
+<hr>
+<p>✨ <strong>Pronto!</strong> Seu sistema de build está configurado e documentado.<br>
+Para dúvidas, consulte o <a href="https://gulpjs.com/docs/en/getting-started/quick-start">Gulp Docs</a>.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Sun May 11 2025 20:54:59 GMT-0300 (Horário Padrão de Brasília) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
