@@ -1,0 +1,43 @@
+{
+  "name": "gulp-build-system",
+  "version": "1.0.0",
+  "description": "Advanced build system with Gulp",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp test",
+    "docs": "gulp docs",
+    "start": "gulp"
+  },
+  "keywords": [
+    "gulp",
+    "build",
+    "sass",
+    "less",
+    "optimization"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@types/mocha": "^10.0.10",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-git": "^2.10.1",
+    "gulp-jsdoc3": "^2.0.0",
+    "gulp-less": "^5.0.0",
+    "gulp-mocha": "^8.0.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-sass": "^6.0.1",
+    "gulp-terser": "^2.1.0",
+    "jsdoc": "^3.6.10",
+    "minami": "^1.2.3",
+    "mocha": "^10.8.2",
+    "pretty-bytes": "^6.1.0",
+    "sass": "^1.88.0",
+    "through2": "^4.0.2"
+  }
+}

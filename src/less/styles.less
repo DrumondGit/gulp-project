@@ -1,0 +1,120 @@
+/* Variáveis - cores e tamanhos */
+@primary-color: #3498db;
+@secondary-color: #2ecc71;
+@text-color: #333;
+@font-size-base: 16px;
+@padding-base: 15px;
+
+/* Mixins - reutilização de estilos */
+.border-radius(@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.box-shadow(@x: 0, @y: 0, @blur: 5px, @color: rgba(0,0,0,0.3)) {
+  box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+}
+
+/* Aninhamento - estrutura hierárquica */
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: @font-size-base;
+  color: @text-color;
+  line-height: 1.6;
+  
+  header {
+    background-color: @primary-color;
+    padding: @padding-base;
+    .box-shadow(0, 2px, 5px);
+    
+    h1 {
+      color: white;
+      margin: 0;
+      
+      small {
+        font-size: 0.7em;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+/* Operações matemáticas */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: @padding-base (@padding-base * 2);
+}
+
+/* Seletor pai (&) */
+.btn {
+  display: inline-block;
+  padding: @padding-base/2 @padding-base;
+  background-color: @primary-color;
+  color: white;
+  text-decoration: none;
+  .border-radius();
+  
+  &:hover {
+    background-color: darken(@primary-color, 10%);
+  }
+  
+  &-secondary {
+    background-color: @secondary-color;
+    
+    &:hover {
+      background-color: darken(@secondary-color, 10%);
+    }
+  }
+  
+  &-large {
+    padding: @padding-base (@padding-base * 1.5);
+    font-size: @font-size-base * 1.25;
+  }
+}
+
+/* Funções LESS */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -(@padding-base/2);
+  
+  &-item {
+    flex: 1 0 calc(33.333% - @padding-base);
+    margin: @padding-base/2;
+    background-color: lighten(@primary-color, 35%);
+    padding: @padding-base;
+    .border-radius();
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      .box-shadow(0, 5px, 15px, rgba(0,0,0,0.2));
+    }
+  }
+}
+
+/* Media queries com variáveis */
+@breakpoint-md: 768px;
+@breakpoint-lg: 992px;
+
+.responsive-example {
+  width: 100%;
+  
+  @media (min-width: @breakpoint-md) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: @breakpoint-lg) {
+    width: 60%;
+  }
+}
+
+/* Importação de outros arquivos LESS */
+// @import "reset.less";
+// @import "typography.less";

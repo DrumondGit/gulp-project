@@ -1,0 +1,38 @@
+// Variáveis
+$cor-primaria: #3498db;
+$cor-secundaria: #2ecc71;
+$fonte-padrao: 'Arial', sans-serif;
+
+// Mixins
+@mixin borda-arredondada($raio) {
+  border-radius: $raio;
+}
+
+// Estilos gerais
+body {
+  font-family: $fonte-padrao;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+// Botão
+.botao {
+  background-color: $cor-primaria;
+  color: white;
+  padding: 10px 20px;
+  @include borda-arredondada(5px);
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $cor-secundaria;
+  }
+}
+
+// Título
+.titulo {
+  font-size: 24px;
+  color: $cor-primaria;
+  margin-bottom: 15px;
+}

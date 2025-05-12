@@ -1,0 +1,99 @@
+
+  <html>
+    <head>
+      <title>Gulp Build Report</title>
+      <style>
+        body { 
+          font-family: 'Segoe UI', sans-serif; 
+          margin: 20px; 
+          line-height: 1.6;
+        }
+        h1 { color: #2c3e50; }
+        table { 
+          border-collapse: collapse; 
+          width: 100%; 
+          margin: 20px 0;
+          box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td { 
+          border: 1px solid #ddd; 
+          padding: 12px; 
+          text-align: left; 
+        }
+        th { 
+          background-color: #3498db; 
+          color: white; 
+          font-weight: bold;
+        }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        .saved { color: #27ae60; font-weight: bold; }
+        .totals { 
+          background-color: #f1f1f1; 
+          font-weight: bold;
+        }
+        .highlight {
+          background-color: #fffde7;
+        }
+        .js-row {
+          background-color: #e3f2fd;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Relatório de Build</h1>
+      
+      <h2>Resumo Geral</h2>
+      <table>
+        <tr class="totals">
+          <td colspan="2">TOTAL</td>
+          <td>3.85 kB</td>
+          <td>1.89 kB</td>
+          <td class="saved">1.96 kB</td>
+          <td>51%</td>
+        </tr>
+      </table>
+
+      <h2>Detalhes por Arquivo</h2>
+      <table>
+        <tr>
+          <th>Tarefa</th>
+          <th>Arquivo</th>
+          <th>Original</th>
+          <th>Otimizado</th>
+          <th>Economia</th>
+          <th>Redução</th>
+        </tr>
+        <tr class="">
+          <td>SASS Minification</td>
+          <td>style.css</td>
+          <td>637 B</td>
+          <td>281 B</td>
+          <td class="saved">356 B</td>
+          <td>56%</td>
+        </tr>
+        <tr class="">
+          <td>LESS Minification</td>
+          <td>styles.css</td>
+          <td>2.47 kB</td>
+          <td>1.29 kB</td>
+          <td class="saved">1.18 kB</td>
+          <td>48%</td>
+        </tr>
+        <tr class="js-row">
+          <td>JS Minification</td>
+          <td>app.min.js</td>
+          <td>746 B</td>
+          <td>325 B</td>
+          <td class="saved">421 B</td>
+          <td>56%</td>
+        </tr>
+      </table>
+      
+      <h2>Destaques</h2>
+      <ul>
+        <li><strong>JavaScript:</strong> 1 arquivos processados</li>
+        <li><strong>CSS:</strong> 2 arquivos compilados</li>
+        <li><strong>Economia total:</strong> 1.96 kB (51% de redução)</li>
+      </ul>
+    </body>
+  </html>
