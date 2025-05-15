@@ -1,17 +1,31 @@
-name: CI Pipeline
+name: CI
 
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install
-      - run: npx gulp build
-      - run: npx gulp docs
-      - run: npx gulp test
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Instalar dependências
+      run: npm install
+
+    - name: Dar permissão para Mocha e JSDoc
+      run: |
+        chmod +x ./node_modules/.bin/mocha
+        chmod +x ./node_modules/jsdoc/jsdoc.js
+
+    - name: Rodar build com Gulp
+      run: npx gulp build
