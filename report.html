@@ -1,91 +1,100 @@
+<html>
+  <head>
+    <title>Gulp Build Report</title>
+    <style>
+      body { 
+        font-family: 'Segoe UI', sans-serif; 
+        margin: 20px; 
+        line-height: 1.6;
+      }
+      h1 { color: #2c3e50; }
+      table { 
+        border-collapse: collapse; 
+        width: 100%; 
+        margin: 20px 0;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+      }
+      th, td { 
+        border: 1px solid #ddd; 
+        padding: 12px; 
+        text-align: left; 
+      }
+      th { 
+        background-color: #3498db; 
+        color: white; 
+        font-weight: bold;
+      }
+      tr:nth-child(even) { background-color: #f8f9fa; }
+      .saved { color: #27ae60; font-weight: bold; }
+      .totals { background-color: #f1f1f1; font-weight: bold; }
+      .highlight { background-color: #fffde7; }
+      .js-row { background-color: #e3f2fd; }
+      .fail { color: #e74c3c; }
+      .pass { color: #2ecc71; }
+    </style>
+  </head>
+  <body>
+    <h1>Relatório de Build</h1>
+    
+    <h2>Resumo Geral</h2>
+    <table>
+      <tr class="totals">
+        <td colspan="2">TOTAL</td>
+        <td>3.3 kB</td>
+        <td>1.57 kB</td>
+        <td class="saved">1.73 kB</td>
+        <td>52%</td>
+      </tr>
+    </table>
 
-  <html>
-    <head>
-      <title>Gulp Build Report</title>
-      <style>
-        body { 
-          font-family: 'Segoe UI', sans-serif; 
-          margin: 20px; 
-          line-height: 1.6;
-        }
-        h1 { color: #2c3e50; }
-        table { 
-          border-collapse: collapse; 
-          width: 100%; 
-          margin: 20px 0;
-          box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        }
-        th, td { 
-          border: 1px solid #ddd; 
-          padding: 12px; 
-          text-align: left; 
-        }
-        th { 
-          background-color: #3498db; 
-          color: white; 
-          font-weight: bold;
-        }
-        tr:nth-child(even) { background-color: #f8f9fa; }
-        .saved { color: #27ae60; font-weight: bold; }
-        .totals { 
-          background-color: #f1f1f1; 
-          font-weight: bold;
-        }
-        .highlight {
-          background-color: #fffde7;
-        }
-        .js-row {
-          background-color: #e3f2fd;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Relatório de Build</h1>
-      
-      <h2>Resumo Geral</h2>
-      <table>
-        <tr class="totals">
-          <td colspan="2">TOTAL</td>
-          <td>3.3 kB</td>
-          <td>1.57 kB</td>
-          <td class="saved">1.73 kB</td>
-          <td>52%</td>
-        </tr>
-      </table>
+    <h2>Detalhes por Arquivo</h2>
+    <table>
+      <tr>
+        <th>Tarefa</th>
+        <th>Arquivo</th>
+        <th>Original</th>
+        <th>Otimizado</th>
+        <th>Economia</th>
+        <th>Redução</th>
+      </tr>
+      <tr>
+        <td>SASS Minification</td>
+        <td>style.css</td>
+        <td>835 B</td>
+        <td>281 B</td>
+        <td class="saved">554 B</td>
+        <td>66%</td>
+      </tr>
+      <tr>
+        <td>LESS Minification</td>
+        <td>styles.css</td>
+        <td>2.47 kB</td>
+        <td>1.29 kB</td>
+        <td class="saved">1.18 kB</td>
+        <td>48%</td>
+      </tr>
+    </table>
 
-      <h2>Detalhes por Arquivo</h2>
-      <table>
-        <tr>
-          <th>Tarefa</th>
-          <th>Arquivo</th>
-          <th>Original</th>
-          <th>Otimizado</th>
-          <th>Economia</th>
-          <th>Redução</th>
-        </tr>
-        <tr class="">
-          <td>SASS Minification</td>
-          <td>style.css</td>
-          <td>835 B</td>
-          <td>281 B</td>
-          <td class="saved">554 B</td>
-          <td>66%</td>
-        </tr>
-        <tr class="">
-          <td>LESS Minification</td>
-          <td>styles.css</td>
-          <td>2.47 kB</td>
-          <td>1.29 kB</td>
-          <td class="saved">1.18 kB</td>
-          <td>48%</td>
-        </tr>
-      </table>
-      
-      <h2>Destaques</h2>
-      <ul>
-        <li><strong>JavaScript:</strong> 0 arquivos processados</li>
-        <li><strong>CSS:</strong> 2 arquivos compilados</li>
-        <li><strong>Economia total:</strong> 1.73 kB (52% de redução)</li>
-      </ul>
-    </body>
-  </html>
+    <h2>Destaques</h2>
+    <ul>
+      <li><strong>JavaScript:</strong> 0 arquivos processados</li>
+      <li><strong>CSS:</strong> 2 arquivos compilados</li>
+      <li><strong>Economia total:</strong> 1.73 kB (52% de redução)</li>
+    </ul>
+
+    <h2>Resumo dos Testes</h2>
+    <p><strong>Testes Passaram:</strong> 2</p>
+    <p><strong>Testes Falharam:</strong> 1</p>
+
+    <h3>Testes com Sucesso</h3>
+    <ul>
+      <li class="pass">Deve retornar cliente ativo</li>
+      <li class="pass">Deve calcular total do pedido corretamente</li>
+    </ul>
+
+    <h3>Testes com Falha</h3>
+    <ul>
+      <li class="fail"><strong>Deve rejeitar pedido com produto inativo</strong>: Produto está inativo e não pode ser adicionado ao pedido</li>
+    </ul>
+  </body>
+</html>
