@@ -79,9 +79,16 @@ gulp.task('less', function () {
     .pipe(gulp.dest('dist/css'));
 });
 
-// Otimização avançada de JavaScript
 gulp.task('scripts', function () {
-  return gulp.src('src/js/**/*.js')
+  return gulp.src([
+      'src/js/**/*.js',
+      'src/controllers/**/*.js',
+      'src/models/**/*.js',
+      'src/services/**/*.js',
+      'src/utils/**/*.js',
+      'src/public/**/*.js',
+      'src/repositories/**/*.js'
+    ])
     .pipe(newer('dist/js/app.min.js'))
     .pipe(babel({
       presets: ['@babel/preset-env']
@@ -106,13 +113,19 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('dist/js'));
 });
 
-// Lint do código fonte
+
 gulp.task('lint', () => {
-  return gulp.src(['src/**/*.js'])
+  return gulp.src([
+      'src/**/*.js',
+      '!src/test/**/*.js',
+      '!src/tests/**/*.js',
+      '!src/acceptance/**/*.js'
+    ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
+
 
 // Testes unitários e de integração
 gulp.task('test', () => {
@@ -229,14 +242,20 @@ gulp.task('report', function (done) {
   done();
 });
 
-// Watch de todos os arquivos
 gulp.task('watch', function () {
   gulp.watch('src/sass/**/*.scss', gulp.series('styles'));
   gulp.watch('src/less/**/*.less', gulp.series('less'));
-  gulp.watch('src/js/**/*.js', gulp.series('scripts', 'lint', 'test'));
+  gulp.watch([
+    'src/js/**/*.js',
+    'src/controllers/**/*.js',
+    'src/models/**/*.js',
+    'src/services/**/*.js',
+    'src/utils/**/*.js',
+    'src/public/**/*.js',
+    'src/repositories/**/*.js'
+  ], gulp.series('scripts', 'lint', 'test'));
   gulp.watch(['src/tests/**/*.js', 'src/acceptance/**/*.js'], gulp.series('lint', 'test'));
 });
-
 // Tarefa principal de build
 gulp.task('build', gulp.series(
   gulp.parallel('styles', 'less', 'scripts'),
