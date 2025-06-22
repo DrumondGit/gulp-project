@@ -1,7 +1,10 @@
-const Produto = require('../src/models/Produto');
+const Produto = require('../models/Produto');
+const { expect } = require('chai');
 
-test('cria um produto com nome e preço', () => {
-  const produto = new Produto('Leite', 4.5);
-  expect(produto.nome).toBe('Leite');
-  expect(produto.preco).toBe(4.5);
+describe('Produto', function() {
+  it('cria um produto com nome e preço', function() {
+    const produto = new Produto('Leite', 4.5);
+    expect(produto.nome).to.equal('Leite');
+    expect(produto.preco).to.equal(4.5);
+  });
 });
