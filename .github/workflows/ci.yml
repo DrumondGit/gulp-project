@@ -54,9 +54,9 @@ jobs:
     - name: 📦 Preparar arquivos para deploy (GitHub Pages)
       run: |
         mkdir dist-gh
-        cp src/index.html dist-gh/
-        cp src/style.css dist-gh/
-        cp src/app.js dist-gh/
+        cp src/public/index.html dist-gh/
+        cp src/public/style.css dist-gh/
+        cp src/public/app.js dist-gh/
 
     - name: 🚀 Deploy para GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
