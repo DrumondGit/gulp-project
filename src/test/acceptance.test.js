@@ -7,7 +7,7 @@ describe('teste de aceitação', function() {
     PedidoController.adicionarItem(2, 'Arroz', 1);
     PedidoController.adicionarItem(2, 'Feijão', 1);
     PedidoController.finalizarPedido(2);
-    const pedidos = require('../src/repositories/PedidoRepository').listar();
+    const pedidos = require('../repositories/PedidoRepository').listar();
     expect(pedidos[2].finalizado).to.be.true;
   });
 });
