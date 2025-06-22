@@ -1,23 +1,23 @@
+// src/models/Pedido.js
 class Pedido {
   constructor(cliente) {
-    this.id = Pedido.incrementaId();
     this.cliente = cliente;
     this.itens = [];
-    this.total = 0;
+    this.finalizado = false;
   }
 
   adicionarItem(produto, quantidade) {
     this.itens.push({ produto, quantidade });
-    this.total += produto.preco * quantidade;
   }
 
-  finalizar() {
-    this.data = new Date();
+  calcularTotal() {
+    return this.itens.reduce((total, item) => {
+      return total + item.produto.preco * item.quantidade;
+    }, 0);
   }
 
-  static incrementaId() {
-    if (!this.latestId) this.latestId = 0;
-    return this.latestId++;
+  finalizarPedido() {
+    this.finalizado = true;
   }
 }
 
