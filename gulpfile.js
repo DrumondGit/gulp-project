@@ -11,6 +11,7 @@ const newer = require('gulp-newer');
 const babel = require('gulp-babel');
 const mocha = require('gulp-mocha');
 const jsdoc = require('gulp-jsdoc3');
+const eslint = require('gulp-eslint');
 
 // Objeto de relatório
 const report = { 
@@ -95,7 +96,7 @@ gulp.task('scripts', function () {
         drop_console: true,
         dead_code: true,
         arguments: true,
-        passes: 2 // Otimização extra
+        passes: 2
       },
       format: {
         comments: false
@@ -105,13 +106,22 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('dist/js'));
 });
 
-// Executa testes com Mocha
-gulp.task('test', function () {
-  return gulp.src('src/test/**/*.js', { read: false })
-    .pipe(mocha({
-      reporter: 'spec',
-      timeout: 5000
-    }))
+// Lint do código fonte
+gulp.task('lint', () => {
+  return gulp.src(['src/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+// Testes unitários e de integração
+gulp.task('test', () => {
+  return gulp.src([
+      'src/test/**/*.js',
+      'src/tests/**/*.test.js',
+      'src/acceptance/**/*.test.js'
+    ], { read: false })
+    .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
     .on('error', function (err) {
       console.error('Testes falharam:', err.message);
       this.emit('end');
@@ -140,12 +150,13 @@ gulp.task('docs', function (cb) {
 
 // Gera relatório HTML
 gulp.task('report', function (done) {
-  // Calcula totais formatados
   const totals = {
     original: prettyBytes(report.totals.original),
     optimized: prettyBytes(report.totals.optimized),
     saved: prettyBytes(report.totals.saved),
-    reduction: `${Math.round(report.totals.saved / report.totals.original * 100)}%`
+    reduction: report.totals.original > 0
+      ? `${Math.round(report.totals.saved / report.totals.original * 100)}%`
+      : '0%'
   };
 
   let html = `
@@ -153,45 +164,20 @@ gulp.task('report', function (done) {
     <head>
       <title>Gulp Build Report</title>
       <style>
-        body { 
-          font-family: 'Segoe UI', sans-serif; 
-          margin: 20px; 
-          line-height: 1.6;
-        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 20px; line-height: 1.6; }
         h1 { color: #2c3e50; }
-        table { 
-          border-collapse: collapse; 
-          width: 100%; 
-          margin: 20px 0;
-          box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        }
-        th, td { 
-          border: 1px solid #ddd; 
-          padding: 12px; 
-          text-align: left; 
-        }
-        th { 
-          background-color: #3498db; 
-          color: white; 
-          font-weight: bold;
-        }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; box-shadow: 0 2px 3px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; font-weight: bold; }
         tr:nth-child(even) { background-color: #f8f9fa; }
         .saved { color: #27ae60; font-weight: bold; }
-        .totals { 
-          background-color: #f1f1f1; 
-          font-weight: bold;
-        }
-        .highlight {
-          background-color: #fffde7;
-        }
-        .js-row {
-          background-color: #e3f2fd;
-        }
+        .totals { background-color: #f1f1f1; font-weight: bold; }
+        .js-row { background-color: #e3f2fd; }
       </style>
     </head>
     <body>
       <h1>Relatório de Build</h1>
-      
+
       <h2>Resumo Geral</h2>
       <table>
         <tr class="totals">
@@ -213,7 +199,7 @@ gulp.task('report', function (done) {
           <th>Economia</th>
           <th>Redução</th>
         </tr>`;
-  
+
   report.logs.forEach(log => {
     const isJS = log.task.includes('JS');
     html += `
@@ -227,10 +213,8 @@ gulp.task('report', function (done) {
         </tr>`;
   });
 
-  // Adiciona seção de destaques
   html += `
       </table>
-      
       <h2>Destaques</h2>
       <ul>
         <li><strong>JavaScript:</strong> ${report.logs.filter(l => l.task.includes('JS')).length} arquivos processados</li>
@@ -245,16 +229,18 @@ gulp.task('report', function (done) {
   done();
 });
 
-// Tarefas auxiliares
+// Watch de todos os arquivos
 gulp.task('watch', function () {
   gulp.watch('src/sass/**/*.scss', gulp.series('styles'));
   gulp.watch('src/less/**/*.less', gulp.series('less'));
-  gulp.watch('src/js/**/*.js', gulp.series('scripts'));
+  gulp.watch('src/js/**/*.js', gulp.series('scripts', 'lint', 'test'));
+  gulp.watch(['src/tests/**/*.js', 'src/acceptance/**/*.js'], gulp.series('lint', 'test'));
 });
 
 // Tarefa principal de build
 gulp.task('build', gulp.series(
   gulp.parallel('styles', 'less', 'scripts'),
+  'lint',
   'test',
   'docs',
   'report'

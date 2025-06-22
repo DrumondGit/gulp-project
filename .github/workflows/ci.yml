@@ -11,21 +11,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
+    - name: 📥 Checkout do código
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
+    - name: ⚙️ Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 18
 
-    - name: Instalar dependências
+    - name: 📦 Instalar dependências
       run: npm install
 
-    - name: Dar permissão para Mocha e JSDoc
+    - name: 📄 Dar permissão para ferramentas CLI
       run: |
         chmod +x ./node_modules/.bin/mocha
-        chmod +x ./node_modules/jsdoc/jsdoc.js
+        chmod +x ./node_modules/.bin/jsdoc
 
-    - name: Rodar build com Gulp
+    - name: 🔍 Rodar lint (ESLint)
+      run: npx gulp lint
+
+    - name: ✅ Executar testes com Mocha
+      run: npx gulp test
+
+    - name: 🛠️ Build completo com Gulp
       run: npx gulp build
+
+    - name: 📤 Upload do relatório de build
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-report
+        path: report.html
+
+    - name: 📤 Upload da documentação gerada
+      uses: actions/upload-artifact@v3
+      with:
+        name: docs
+        path: docs
