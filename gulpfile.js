@@ -13,13 +13,18 @@ const mocha = require('gulp-mocha');
 const jsdoc = require('gulp-jsdoc3');
 const eslint = require('gulp-eslint');
 
-// Objeto de relatório
+
+
 const report = { 
   logs: [],
   totals: {
     original: 0,
     optimized: 0,
     saved: 0
+  },
+  tests: {
+    passed: [],
+    failed: []
   }
 };
 
@@ -127,19 +132,39 @@ gulp.task('lint', () => {
 });
 
 
-// Testes unitários e de integração
 gulp.task('test', () => {
-  return gulp.src([
-      'src/test/**/*.js',
-      'src/tests/**/*.test.js',
-      'src/acceptance/**/*.test.js'
-    ], { read: false })
-    .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
-    .on('error', function (err) {
-      console.error('Testes falharam:', err.message);
-      this.emit('end');
+  const mochaRunner = new mocha({ reporter: 'spec', timeout: 5000 });
+  const testFiles = [
+    'src/test/**/*.js',
+    'src/tests/**/*.test.js',
+    'src/acceptance/**/*.test.js'
+  ];
+
+  return gulp.src(testFiles, { read: false })
+    .pipe(through.obj(function (file, enc, cb) {
+      mochaRunner.addFile(file.path);
+      cb(null, file);
+    }))
+    .on('end', function () {
+      const runner = mochaRunner.run(function (failures) {
+        if (failures) {
+          console.log(`${failures} testes falharam`);
+        }
+      });
+
+      runner.on('pass', function (test) {
+        report.tests.passed.push(test.fullTitle());
+      });
+
+      runner.on('fail', function (test, err) {
+        report.tests.failed.push({
+          title: test.fullTitle(),
+          error: err.message
+        });
+      });
     });
 });
+
 
 // Gera documentação com JSDoc
 gulp.task('docs', function (cb) {
@@ -186,6 +211,8 @@ gulp.task('report', function (done) {
         .saved { color: #27ae60; font-weight: bold; }
         .totals { background-color: #f1f1f1; font-weight: bold; }
         .js-row { background-color: #e3f2fd; }
+        .fail { color: #e74c3c; }
+        .pass { color: #2ecc71; }
       </style>
     </head>
     <body>
@@ -228,12 +255,28 @@ gulp.task('report', function (done) {
 
   html += `
       </table>
+
       <h2>Destaques</h2>
       <ul>
         <li><strong>JavaScript:</strong> ${report.logs.filter(l => l.task.includes('JS')).length} arquivos processados</li>
         <li><strong>CSS:</strong> ${report.logs.filter(l => l.task.includes('SASS') || l.task.includes('LESS')).length} arquivos compilados</li>
         <li><strong>Economia total:</strong> ${totals.saved} (${totals.reduction} de redução)</li>
       </ul>
+
+      <h2>Resumo dos Testes</h2>
+      <p><strong>Testes Passaram:</strong> ${report.tests.passed.length}</p>
+      <p><strong>Testes Falharam:</strong> ${report.tests.failed.length}</p>
+
+      <h3>Testes com Sucesso</h3>
+      <ul>
+        ${report.tests.passed.map(t => `<li class="pass">${t}</li>`).join('\n')}
+      </ul>
+
+      <h3>Testes com Falha</h3>
+      <ul>
+        ${report.tests.failed.map(f => `<li class="fail"><strong>${f.title}</strong>: ${f.error}</li>`).join('\n')}
+      </ul>
+
     </body>
   </html>`;
 
@@ -241,6 +284,7 @@ gulp.task('report', function (done) {
   console.log('Relatório gerado em: report.html');
   done();
 });
+
 
 gulp.task('watch', function () {
   gulp.watch('src/sass/**/*.scss', gulp.series('styles'));
