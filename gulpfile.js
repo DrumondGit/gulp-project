@@ -12,6 +12,7 @@ const babel = require('gulp-babel');
 const Mocha = require('mocha');
 const jsdoc = require('gulp-jsdoc3');
 const eslint = require('gulp-eslint');
+const ghPages = require('gulp-gh-pages');
 
 
 
@@ -308,6 +309,11 @@ gulp.task('build', gulp.series(
   'docs',
   'report'
 ));
+
+gulp.task('deploy', () =>
+  gulp.src('dist/**/*')
+    .pipe(ghPages())
+);
 
 // Tarefa padrão
 gulp.task('default', gulp.series('build', 'watch'));

@@ -11,8 +11,39 @@
   <input id="produto-preco" placeholder="Preço" type="number">
   <button onclick="cadastrarProduto()">Cadastrar</button>
 
-  <h2>Produtos</h2>
+  <h2>Buscar Produtos</h2>
+  <input id="filtro-produto" oninput="filtrarProdutos()" placeholder="Digite para buscar...">
+
+  <h2>Produtos Cadastrados</h2>
   <ul id="lista-produtos"></ul>
+
+  <h2>Loja</h2>
+  <ul id="produtos-disponiveis"></ul>
+
+  <h2>Carrinho de Compras</h2>
+  <ul id="carrinho"></ul>
+  <p>Total: R$ <span id="total">0.00</span></p>
+
+  <h2>Dashboard</h2>
+  <div class="dashboard-chart">
+  <div class="dashboard-bar">
+    <div class="bar-value" id="val-produtos"></div>
+    <div class="bar-fill" id="bar-produtos"></div>
+    <span>Produtos</span>
+  </div>
+  <div class="dashboard-bar">
+    <div class="bar-value" id="val-media"></div>
+    <div class="bar-fill" id="bar-media"></div>
+    <span>Média</span>
+  </div>
+  <div class="dashboard-bar">
+    <div class="bar-value" id="val-carrinho"></div>
+    <div class="bar-fill" id="bar-carrinho"></div>
+    <span>Carrinho</span>
+  </div>
+</div>
+
+</div>
 
   <script src="app.js"></script>
 </body>
