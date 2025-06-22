@@ -9,7 +9,7 @@ const fs = require('fs');
 const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
-const mocha = require('gulp-mocha');
+const Mocha = require('mocha');
 const jsdoc = require('gulp-jsdoc3');
 const eslint = require('gulp-eslint');
 
@@ -133,7 +133,7 @@ gulp.task('lint', () => {
 
 
 gulp.task('test', () => {
-  const mochaRunner = new mocha({ reporter: 'spec', timeout: 5000 });
+  const mochaRunner = new Mocha({ reporter: 'spec', timeout: 5000 });
   const testFiles = [
     'src/test/**/*.js',
     'src/tests/**/*.test.js',
