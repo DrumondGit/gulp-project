@@ -1,9 +1,16 @@
-# **🚀 Gulp Build System - Documentação Completa**  
+# **🚀 Final Boss Supermarket - Documentação Completa**  
 
 ![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)  
 ![Gulp](https://img.shields.io/badge/gulp-4.0.2-blue)  
 ![License](https://img.shields.io/badge/license-MIT-green)  
 
+Este Plano de Gerenciamento de Configuração foi elaborado com o objetivo de formalizar os processos de controle e rastreabilidade dos artefatos produzidos no projeto Final Boss SuperMarket, um sistema web de gerenciamento de produtos, carrinho de compras e dashboard.
+
+O plano descreve como os itens de configuração serão identificados, controlados, auditados e versionados, além de definir ferramentas, responsabilidades e marcos importantes. A adoção de boas práticas de DevOps, aliadas ao uso de ferramentas modernas como Gulp, Mocha, ESLint e GitHub Actions, visa garantir a qualidade, integridade e consistência dos artefatos ao longo de todo o ciclo de vida do projeto.
+
+Este documento é voltado aos membros da equipe de desenvolvimento, instrutores da disciplina e quaisquer partes interessadas no processo de configuração e entrega contínua do software.
+
+Esse sistema utiliza:
 Um **sistema de build automatizado** usando **Gulp** para processar **SASS, LESS, JavaScript**, gerar **documentação** e **relatórios de otimização**.  
 
 ---
